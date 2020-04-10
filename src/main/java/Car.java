@@ -47,7 +47,6 @@ public class Car {
         fuel = Fuel;
         maxSpeed = MaxSpeed;
     }
-
     public void fuelOut() {
         System.out.println("Fuel volume: " + getFuel());
     }
