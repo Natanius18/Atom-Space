@@ -4,7 +4,7 @@ public class Music implements Play {
     String genre;
     String name;
 
-   Music(String genre, String name){
+    public Music(String genre, String name){
        this.genre = genre;
        this.name = name;
 
