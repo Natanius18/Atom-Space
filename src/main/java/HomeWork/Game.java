@@ -5,7 +5,7 @@ public class Game extends Program implements Play {
     private String name;
     private String type;
 
-    Game(int size, String name, String type) {
+    public Game(int size, String name, String type) {
         super(size, name);
         this.type = type;
         this.size = size;
@@ -23,10 +23,6 @@ public class Game extends Program implements Play {
     @Override
     public void play() {
         System.out.println("The " + this.type + " " + this.name +" is playing. Size: " + size);
-
     }
 
-//    @Override
-//    public void stop() {
-//    }
 }
