@@ -64,7 +64,6 @@ public class Cat {
     }
 
 
-
     public <H extends Voice<Long>> void someMethod(H generic) {
         System.out.println(generic.voice());
     }
