@@ -16,7 +16,6 @@ public class Cat {
         this.age = age;
     }
 
-
     public long getId() {
         return id;
     }
@@ -53,14 +52,17 @@ public class Cat {
     private static Name[] names = {Name.BARSIK, Name.MADISON, Name.TISHKA};
     private static String[] staffTypes = {"steel", "cast iron", "copper"};
 
+
+    static int x = 1;
     public static Cat generateRandomCat() {
         Random random = new Random();
-        int id = 1;
+        int id = x;
+        x++;
         String staff = Cat.staffTypes[random.nextInt(2)];
         Integer age = random.nextInt(25);
         Integer weight = random.nextInt(50);
         String name = Cat.names[random.nextInt(2)].toString();
-        return new Cat(++id, name, age, weight);
+        return new Cat(id, name, age, weight);
     }
 
 
