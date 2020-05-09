@@ -6,8 +6,8 @@ import java.util.function.Function;
 public class Cat {
     protected long id;
     protected String name;
-    protected Integer weight;
-    protected Integer age;
+    protected Number weight;
+    protected Number age;
 
     public Cat(long id, String name, Integer weight, Integer age) {
         this.id = id;
@@ -33,7 +33,7 @@ public class Cat {
         this.name = name;
     }
 
-    public Integer getWeight() {
+    public Number getWeight() {
         return weight;
     }
 
@@ -41,7 +41,7 @@ public class Cat {
         this.weight = weight;
     }
 
-    public Integer getAge() {
+    public Number getAge() {
         return age;
     }
 
@@ -63,15 +63,16 @@ public class Cat {
         return new Cat(++id, name, age, weight);
     }
 
+
+
+    public <H extends Voice<Long>> void someMethod(H generic) {
+        System.out.println(generic.voice());
+    }
+
 }
 
 enum Name {
     BARSIK,
     TISHKA,
     MADISON
-}
-    public <H extends Voice<Long>> void someMethod(H generic) {
-        System.out.println(generic.voice());
-    }
-
 }
