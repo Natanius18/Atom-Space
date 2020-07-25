@@ -1,30 +1,25 @@
 package residents;
 
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 
+
 public class CSVReader {
-    public static ArrayList<Resident> importFromCSV() {
+    public static void importFromCSV() {
         ArrayList<Resident> residents = new ArrayList<>();
         String csvFile = "C:\\Users\\Натан\\Desktop\\residents.csv";
         String line;
-
         try {
             BufferedReader br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
                 if (parseContactLine(line) != null) {
                     residents.add(parseContactLine(line));
-                    residents.sort(Comparator.comparing(Resident::getName));
                 }
             }
-
+            residents.sort(Comparator.comparing(Resident::getName));
             for (Resident resident : residents) {
                     System.out.println("Name: " + resident.getName());
                     System.out.println("Skill: " + resident.getSkill());
@@ -34,7 +29,6 @@ public class CSVReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return residents;
     }
 
     private static Resident parseContactLine(String line) {
