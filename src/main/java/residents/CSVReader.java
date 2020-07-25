@@ -1,48 +1,55 @@
 package residents;
 
+
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
-public class CSVReader{
-    public static void main(String[] args) {
+public class CSVReader {
+    public static ArrayList<Resident> importFromCSV() {
+        ArrayList<Resident> residents = new ArrayList<>();
         String csvFile = "C:\\Users\\Натан\\Desktop\\residents.csv";
-        BufferedReader br = null;
-        String line = "";
-        String cvsSplitBy = ",";
+        String line;
 
         try {
-
-            br = new BufferedReader(new FileReader(csvFile));
+            BufferedReader br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
-                String[] split = line.split(cvsSplitBy);
-                System.out.println("Name: " + split[0] + ", skill: " + split[1] + ",  e-mail:" + split[2]);
-
-
-
-                String [] data = line.split(";");
-                Resident resident = null;
-
-                if (data.length == 3){
-                    String[] dataName = data[0].split(" ");
-                    String[] dataSkill = data[1].split(" ");
-                    String[] dataEmail = data[2].split(" ");
-                    resident = new Resident(dataName[1], dataSkill[2], dataEmail[2]);
+                if (parseContactLine(line) != null) {
+                    residents.add(parseContactLine(line));
+                    residents.sort(Comparator.comparing(Resident::getName));
                 }
             }
 
+            for (Resident resident : residents) {
+                    System.out.println("Name: " + resident.getName());
+                    System.out.println("Skill: " + resident.getSkill());
+                    System.out.println("E-mail: " + resident.getEmail());
+                    System.out.println("--------------------------");
+            }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        }
+        return residents;
+    }
+
+    private static Resident parseContactLine(String line) {
+        String[] data = line.split(",");
+        Resident resident = null;
+        if (data.length == 3) {
+            String[] dataName = data[0].split(" ");
+            String[] dataSkill = data[1].split(" ");
+            String[] dataEmail = data[2].split(" ");
+            if (Integer.parseInt((dataSkill[0]))>0) {
+                resident = new Resident(dataName[0], dataSkill[0], dataEmail[0]);
+            }else {
+                resident = null;
             }
         }
-
+        return resident;
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Residents {
     public static void main(String[] args) {
-        System.out.println();
+        ArrayList<Resident> residents = new ArrayList<>();
+        CSVReader.importFromCSV();
     }
 }
