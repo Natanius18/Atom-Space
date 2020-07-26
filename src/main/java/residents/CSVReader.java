@@ -15,11 +15,11 @@ public class CSVReader {
         try {
             BufferedReader br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
-                if (parseContactLine(line) != null) {
+                if (Integer.parseInt((parseContactLine(line).getSkill()))>0 & parseContactLine(line).getEmail().endsWith("@email.com") & parseContactLine(line).getEmail().startsWith(parseContactLine(line).getName())) {
                     residents.add(parseContactLine(line));
                 }
             }
-            residents.sort(Comparator.comparing(Resident::getName));
+            residents.sort(Comparator.comparing(Resident::getName).thenComparing(Resident::getSkill));
             for (Resident resident : residents) {
                     System.out.println("Name: " + resident.getName());
                     System.out.println("Skill: " + resident.getSkill());
@@ -38,11 +38,7 @@ public class CSVReader {
             String[] dataName = data[0].split(" ");
             String[] dataSkill = data[1].split(" ");
             String[] dataEmail = data[2].split(" ");
-            if (Integer.parseInt((dataSkill[0]))>0) {
-                resident = new Resident(dataName[0], dataSkill[0], dataEmail[0]);
-            }else {
-                resident = null;
-            }
+            resident = new Resident(dataName[0], dataSkill[0], dataEmail[0]);
         }
         return resident;
     }
